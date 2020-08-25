@@ -34,7 +34,7 @@ task generatePdf (type: Exec) {
 
         def pdfFile = 'help.pdf'
         String inputs = new File("$buildDir/.pdf-input").text.trim()
-        args "--left", ".7in", "--right", ".7in", "--linkcolor", "blue", "--webpage", "-f", "$buildDir/$pdfFile", "--titleimage"
+        args "--compression=9", "--left", ".7in", "--right", ".7in", "--linkcolor", "blue", "--webpage", "-f", "$buildDir/$pdfFile", "--titleimage"
         args inputs.split()
 
         println ">> generatePdf: $commandLine"
@@ -51,7 +51,7 @@ task loadConfig {
         if (project.hasProperty("appConfig")) {
             def env = findProperty("env") ? project.env : "local"
             def source = appConfig instanceof File ? appConfig.toURL() : new ClosureScript(closure: appConfig)
-            project.ext.appProps = new ConfigSlurper(env).parse(source).toProperties()
+            appProps.putAll( new ConfigSlurper(env).parse(source).toProperties() )
         }
 
         // generate version tag
@@ -88,6 +88,13 @@ task zipHelp(type: Zip) {
 task buildPdfInput(type:Exec) {
     workingDir = appRoot
     commandLine "npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/builder.js ${app_name} ${buildDir}".split(" ")
+    doFirst {
+        for (String key : appProps.keySet()) {
+            if (key.startsWith('REACT_APP_')) {
+                environment (key, appProps[key])
+            }
+        }
+    }
 }
 
 task buildClient(dependsOn: loadConfig) {
