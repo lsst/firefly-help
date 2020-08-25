@@ -1,4 +1,4 @@
 rootProject.name = 'root'
 
-include 'firefly'
+include 'suit'
 
