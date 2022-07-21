@@ -18,7 +18,9 @@ being the ability to sort and filter. If you also have <a
 href="visualization.html">Visualization</A> capability installed, you
 can overlay catalogs on images. If you also have <a
 href="plots.html">plotting</A> capability installed, you can make
-plots of your table.<P>
+plots of your table.  One specific application of Firefly tables is
+astronomical catalogs; see the <a href="catalogs.html">catalogs
+section</A>. <P>
 
 
 <em>Contents of page/chapter:</em><br>
@@ -26,7 +28,7 @@ plots of your table.<P>
 +<A href="#columns">Table Columns</A>  <br>
 +<A href="#filters">Table Filters</A>  <br>
 +<A href="#save">Saving Tables</A>  <br>
-+<A href="#catalogs">Catalogs</A>  <br>
++<a href="#navigation">Table Navigation</A> <br>
 <P>&nbsp;<P>
 
 
@@ -55,9 +57,9 @@ tab.<P>
 Immediately below the tab name, there are several symbols:<br> <img
 src="img/tablehead.png"><br> which we now describe.<P>
 
-The first thing to notice is that only the first 50 rows of the
+The first thing to notice is that only the first 100 rows of the
 retrieved catalog are displayed in the table. In the example here,
-there are ~28,000 sources that were retrieved in the search.  The
+there are ~7,700 sources that were retrieved in the search.  The
 left/right black arrows plus the page number allow you to navigate
 among these 'pages' of 50 sources each.  Note that the entire set of
 results (not just the 50 rows you are currently viewing) can be sorted
@@ -76,28 +78,43 @@ to <img src="img/table.png"> -- click this again to return to the
 default table view.<P>
 
 The next icon is <img src="img/savetable.png"> which is "Save" -- this
-is how you may save the catalog. It has its <a href="#save">own section below</A>.<P>
+is how you may save the catalog. It has its <a href="#save">own
+section below</A>.<P>
 
+You may or may not see the next icon: <img src="img/infolink.png">
+This is an "information" button and, if it exists, it may provide
+addtional information about the table. It could have information about
+the job that was used to retrieve it:<br>
+<img src="img/tableinfo-jobinfo.png"><br>
+where the direct link to the job is given there (and can be copied by
+clicking on the clipboard, ready to be pasted into a helpdesk query,
+for example), with a job id as shown. It could also just have
+information about the table metadata:<br>
+<img src="img/tableinfo-metadata.png"><br>
+where the information about this table includes information about the
+query that produced it.<P>
 
 The next option on the top of the catalog tab is this: <img
 src="img/tableoptions.png">.  Clicking on this icon brings up options
 for the table, e.g., how many rows are displayed per page, which
 columns are shown, whether units and data types are shown at the top
-of the column, shown here:<br> <img src="img/toptableoptions.png" width="50%"><br>
-By default, all columns are shown. The default page size is 100 rows. 
-Note that expanding the page size to numbers much greater than 100 may
-result in a substantial performance degradation (e.g., your browser
-will appear to freeze or not appear to be doing anything while it
-manages and renders the large table). See the <a
-href="#filters">Filters section below</A> for more things to do from
-the table options pop-up. <P>
+of the column, shown here:<br> <img src="img/toptableoptions.png"
+width="50%"><br> By default, it is often but not always the case that
+all columns are shown. The default page size is 100 rows.  Note that
+expanding the page size to numbers much greater than 100 may result in
+a substantial performance degradation (e.g., your browser will appear
+to freeze or not appear to be doing anything while it manages and
+renders the large table). See the <a href="#filters">Filters section
+below</A> for more things to do from the table options pop-up. <P>
 
 This is one of the last options on the top of the catalog tab: <img
 src="img/expand-24x24.png">. Clicking on this expands the catalog
 window pane to take up the entire browser window. To return to the
 prior view, click on "Close" in the upper left.<P>
 
-The last option on the top of the catalog tab may be a context-sensitive help marker <img src="img/help.png">, which should bring you to this online help.<P>
+The last option on the top of the catalog tab may be a
+context-sensitive help marker <img src="img/help.png">, which should
+bring you to this online help.<P>
 
 
 <h3><A name="columns">Table Columns</A></h3>
@@ -223,6 +240,7 @@ resembles the text that you type in the box.
 string: !=''
 <LI> Retain rows for which a certain parameter is not NULL and is
 larger than 1.234: &gt; 1.234 and IS NOT NULL
+<LI> Retain rows that have values between -0.5 and 1.25: &gt; -05 and &lt; 1.25
 <LI> Retain rows with a parameter greater than one value or exactly
 equal to another value: &gt; 12345 or != 3000 
 <LI>Retain rows with a parameter equal to one of the values in a list:
@@ -237,8 +255,7 @@ imposed to only include the 6 rows you selected.<P>
 
 
 You can also interactively impose filters from <a
-href="plots.html">plots</A> from the catalog - see the next
-section.<P>
+href="plots.html">plots</A> from the catalog - see that section.<P>
 
 
 If you click on the table options icon (<img
@@ -259,15 +276,13 @@ constraints you have imposed are in the "current constraints" box, and
 you can apply additional SQL constraints via the free-form text box.
 Hints for syntax are given below the entry box. This window can be
 resized such that you can see the whole set of hints and imposed
-filters.<P>
-
-The third tab is just the table metadata:<br>
-<img src="img/tablemetadata.png" width="25%"><P>
+filters. Note that in this interface, column headers must be enclosed
+within double quotes.<P>
 
 
 
 
-<strong>Tips and Troubleshooting</strong>:
+<strong>Tips and Troubleshooting</strong>
 
 <UL>
 <LI>If you impose logically inconsistent restrictions such as
@@ -298,6 +313,11 @@ drawn on the plot. If you want to remove, say, just one of the four
 filters (rather than all of them by cancelling all filters), you can
 do so from the table options pop-up. 
 
+<LI>If you want to copy all of the "current constraints", even if the
+entire field is not visible to you, you can triple-click with your
+mouse to select the entire field, and then paste it into another
+field or application to see what it is.
+
 </UL>
 
 
@@ -310,6 +330,23 @@ filter applied, in this case just one filter: <img
 src="img/filtersapplied.png"> To clear the filters, click on the
 cancel filters icon (which also appears after you impose filters):
 <img src="img/cancelfilters.png">.<P>
+
+
+<h3><A name="cells">Table Cells</A></h3>
+
+Some cell values may be too long for the cell space. If that is the
+case, an ellipsis ("...") will appear in the cell as you mouse over
+it: <br><img src="img/cellellipsis.png"><P>
+
+If you click on the ellipsis, you get a pull-down menu: <br><img
+src="img/cellmenu.png"> from which you can choose to copy the cell
+value or view it in a pop-up window.<P>
+
+If you view it in a pop-up window, it will come up with no special
+formatting:<br> <img src="img/cellpopup-noformatting.png"><br>  If the
+cell has a lot of information, it may help to impose simple
+formatting, which it attempts to do if you tick the box "View with
+formating":<br>  <img src="img/cellpopup-formatting.png"><P>
 
 
 <h3><A name="save">Saving Tables</A></h3>
@@ -326,178 +363,57 @@ You obtain this pop-up:<br>
 <img src="img/savetablepopup.png" width="500"><p>
 
 
-From here, you can save the table in a variety of formats:<br>
-<img src="img/savetableoptions.png"><br>
+From here, you can save the table in a variety of formats:<br> <img
+src="img/savetableoptions.png"><br>
 
 It defaults to saving it as an <a
 href="https://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html"
-target="_blank">IPAC table file <img src="img/jumpout.jpg" height="10"></A>, which is basically ASCII text
-with headers explaining the type of data in  each column, separated by
-vertical bars. <P>
+target="_blank">IPAC table file <img src="img/jumpout.jpg"
+height="10"></A>, which is basically ASCII text with headers
+explaining the type of data in  each column, separated by vertical
+bars. <P>
 
-Other formats include comma-separated values (suitable for, e.g., Excel), tab-separated values, and four different versions of <A href="http://www.ivoa.net/documents/VOTable/">VO tables <img src="img/jumpout.jpg" height="10"></A>.<P>
+Other formats include comma-separated values (suitable for, e.g.,
+Excel), tab-separated values, and four different versions of <A
+href="http://www.ivoa.net/documents/VOTable/">VO tables <img
+src="img/jumpout.jpg" height="10"></A>.<P>
 
 The filename  may include the word "gator" because, under the hood,
 the software is talking to the <a
 href="https://irsa.ipac.caltech.edu/applications/Gator/"
-target="_blank">IRSA General Catalog Query Engine <img src="img/jumpout.jpg" height="10"></A>, powered by
-Gator.<P>
+target="_blank">IRSA General Catalog Query Engine <img
+src="img/jumpout.jpg" height="10"></A>, powered by Gator.<P>
 
 
 
+<h3><A name="navigation">Table Navigation</A></h3>
 
+With the ability to <a href="visualization.html#extraction">extract
+data</A> from images comes the ability to rather quickly drown in
+tables. There is a way to navigate among a lot of table tabs that have
+accumulated.<P>
 
-<h3><a name="catalogs">Catalogs</A></h3>
+This is probably best explained via an example. Here, I have tabs
+showing that I have <a
+href="visualization.html#extraction">extracted</A> several lines,
+drills, and points from my images:<br>
+<img src="img/tabnav1.png" height="30"><br>
+On the far right, I have a downward pointing arrow. When I click on
+this, I get a pulldown:<br>
+<img src="img/tabnav2.png"><br>
+This pulldown shows that the tab marked "Points 14" is in the
+foreground (it is shaded yellow) and it has a filter box at the top.
+That filter box at the top works just like the filters discussed <a
+href="#filters">above</A>, so if I want to find the tabs with the
+extracted lines, I can type "line" in the box, and it will filter down
+the list, leaving only those tabs with "line" in the name:<br>
+<img src="img/tabnav3.png"><br>
+Then, from there, I can select the tab I want to bring to the
+foreground. (When I select a tab to bring to the foreground, that tab
+is also in the foreground for plotting.)<P>
 
-One specific application of Firefly tables is astronomical catalogs.
-You may have have the ability to search catalogs, and you may have
-this kind of a catalog search window.  <P>
-
-<img src="img/catalogsearch.png" width="100%"><P>
-
-The upper left of this window is where you specify which catalog you
-want to search.  To change catalogs, first select the "project" under
-which they are housed at IRSA, such as 2MASS, IRAS, WISE, MSX, etc. 
-The available choices under the "category" and the specific clickable
-catalog change according to the project you have selected.  A short
-description is provided for each of the catalogs, with links for more
-information (including definitions of the sometimes cryptic column
-names); an example is here:<br> <img src="img/catalogcoldef.png"><P>
-
-The upper right of this window is where you specify the target (the
-position is pre-filled with its best guess as to what you want) and
-the search method (cone, elliptical, box, polygon, multi-object,
-all-sky), and the parameters that go with that search method (e.g.,
-the radius of the cone). The parameters for each of these searches
-change dynamically as you select search options.  <P>
-
-<DL>
-<DT><strong>Caution</strong>: <DD>Pick your units from the pulldown
-first, and then enter a number; if you enter a number and then select
-from the pulldown, it will convert your number from the old units to
-the new units. There are both upper and lower limits to your search
-radius; it will tell you if you request something too big or too
-small. Note that these limits are survey-dependent.   <P>
-
-<DT><strong>Cone search</strong>: <dd> <img
-src="img/catsearch-cone.png"> <br> It has guessed what position you want,
-based on prior searches. You specify the cone radius.<P>
-
-<DT><strong>Elliptical search</strong>: <dd> <img
-src="img/catsearch-ellip.png"> <br> It has guessed what position you want,
-based on prior searches. You specify the search ellipse's semi-major
-axis, position ratio, and axial ratio.<P>
-
-<DT><strong>Box search</strong>: <dd> <img
-src="img/catsearch-box.png"> <br> It has guessed what position you want,
-based on prior searches. You specify the box's length on a side.<P>
-
-<DT><strong>Polygon search</strong>: <dd> <img
-src="img/catsearch-polygon.png"> <br> Note that it no longer has a
-single target location. It has pre-filled the vertices of the position
-it thinks you want, based on prior searches.  You can select whether
-you want the catalog request to match the entire area of the image you
-have selected ("image"), or just the portion of the image you can see
-in the current view ("visible"), or your own ("custom") area. The list
-of vertices in the coordinates box are in decimal RA and Dec in
-degrees. You must enter at least 3 and at most 15 vertices, separated
-by a comma. Note that, for overlaying catalogs on HiPS images, you
-cannot select "image", because HiPS images are generally very, very
-large, so this would result in too many points being returned. There
-is a maximum of 5 degrees imposed on catalog searches to match HiPS
-images.<P>
-
-<DT><strong>Multi-Object search</strong>: <dd> <img
-src="img/catsearch-multiobj.png"><br> In this case, it has not attempted
-to guess what position you want. You need to upload a file in <a
-href="https://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html"
-target="_blank">IPAC table format <img src="img/jumpout.jpg"
-height="10"></A>, which is a varietal of plain text. (IRSA has a <a
-href="https://irsa.ipac.caltech.edu/applications/TblValidator/"
-target="_blank">table reformatting and validation service <img
-src="img/jumpout.jpg" height="10"></A> which may be helpful.) Note
-that you also have to specify the radius over which to search for each
-of the targets in your list.<P>
-
-When you do a multi-position search on catalogs, three new columns are
-added to the catalog as it is returned to you. These columns are :
-<UL>
-<LI>cntr_01 - the target position you requested
-<LI>dist_x - the distance between the target position you requested
-and the object it found
-<LI>pang_x - the position angle between the target position you requested
-and the object it found
-</UL>
-These additional columns can help you assess if the target it found is
-the target that should be matched to the position you requested.<P>
-
-
-<DT><strong>All-sky search</strong>: <dd> <img
-src="img/catsearch-allsky.png"><br> Because this is an all-sky search, it
-does not have a single target entry box. In order to constrain this
-search, you need to impose constraints on the bottom of the screen
-(see below). <P>
-
-</dl>
-
-The bottom of this window allows you to set restrictions on specific
-columns. It gives you a list of all the available column names in the
-corresponding catalog. (Most catalogs have identical "standard" and
-"long form" but some have more columns available in "long form".) From
-here, you can choose what to display (tickboxes on the left), and
-filter what is returned ("constraints" column). For example, only
-return objects with values in column y that are greater than x. If you
-add more than one restriction, they are combined logically using an
-"AND" operators; be careful, because you can thus restrict data such
-that none of the catalog meets your criteria.<P>
-
-Click on "Search" to initiate the search. It will load the catalog
-into a tab of its own. The objects will also be overlaid on any images
-you have loaded, and a default x-y plot will be shown. (For more on
-the x-y plots, see <a href="plots.html">the plots section</A>.)  All
-of these representations are interlinked -- clicking on a row in the
-table shows it on the image and in the plot, and clicking on an object
-in the image shows it in the table and in the plot, and clicking on an
-object in the plot shows it in the table and on the image.<P>
-
-To close the catalog search window without searching for a catalog,
-click on "Cancel".<P>
-
-<strong>Tips and Troubleshooting.</strong> 
-<UL>
-<LI>If the catalog search is successful quickly, it will promptly
-return the results in a tab of its own. 
-
-<LI>The search may take a long time to return, especially if you have
-asked for a large catalog, and you may think that nothing has
-happened, but be patient and eventually it will return a tab.
-
-<LI>Use large search radii with caution! Be sure you understand how
-many sources you are likely to retrieve. Searches that retrieve more
-rows will take longer. Searches that retrieve tens of thousands of
-rows will take quite a while. 
-
-<LI>If your catalog has RA and Dec included in it, and you have an <a
-href="visualization.html">image with a WCS</A> loaded into your tool,
-then it will overlay the catalog on the image. If your catalog does
-not overlay, check to be sure your catalog has columns called "ra" and
-"dec" (all lower-case letters). If it does not work, experiment with
-"RA" and "Dec" or "DEC". 
-
-<LI> If you overlay a large catalog, then turn around and <a
-href="visualization.html#fitsDownloadOptions">save a regions file from
-the catalog overlay</A>, then currently it is the case that only the
-first 499 sources in the full catalog will be saved to the regions
-file.
-
-<LI>If you have "pan by table row" turned on (see <a
-href="visualization.html#panbytablerow">Visualization chapter</A>),
-then it may be disconcerting to have the images "jump" right after the
-catalog loads. It is centering the selected catalog object (the first
-one upon catalog loading) in the viewer. If you don't like this, turn
-off "pan by table row".
-
-</ul><P>
+In this fashion, you can navigate among many tabs that are open at the
+same time.<P>
 
 
 
